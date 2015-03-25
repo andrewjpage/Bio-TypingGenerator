@@ -45,10 +45,18 @@ sub unique_cluster
   my($self) = @_;
   if(@{$self->variation_clusters} == 1)
   {
+	  for my $comparison_cluster(@{$self->reference_clusters})
+	  {
+		  return undef if($comparison_cluster == $self->variation_clusters->[0]);
+	  }
     return $self->variation_clusters->[0];
   }
   elsif(@{$self->reference_clusters} == 1)
   {
+	  for my $comparison_cluster(@{$self->variation_clusters})
+	  {
+		  return undef if($comparison_cluster == $self->reference_clusters->[0]);
+	  }
   	return $self->reference_clusters->[0];
   }
   else
